@@ -57,7 +57,7 @@ app.post('/signup', async (req, res, next) => {
 
     res.status(201).send(user);
   } catch (err) {
-    next('signup error occurred');
+    next(console.log('signup error occurred:', err));
   }
 });
 
