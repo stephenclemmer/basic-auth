@@ -12,9 +12,7 @@ PORT - 3001
 Authentication System Phase 1: Deploy an Express server that implements Basic Authentication, with signup and signin capabilities, using a Postgres database for storage.
 
 **UML**
-![Lab 6 UML](./assets/Basic%20Authentication%20Whiteboard.png)
-
-UML on this assignment was created by Instructor Ryan Gallaway
+![Lab 6 UML](./assets/Lab%2006%20Basic%20Auth%20UML.png)
 
 **Tests**
 TBD
