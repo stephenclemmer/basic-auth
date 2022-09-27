@@ -1,10 +1,10 @@
 'use strict';
 
-let { start, sequelizeDatabase} = require('./src/server');
+const { start, sequelizeDatabase} = require('./src/server');
 
 sequelizeDatabase.sync()
   .then(() => {
-    console.log('successfully connected');
+    console.log('Successful Connection!');
     start();
   })
-  .catch((e) => console.error(e));
+  .catch(err => console.error(err));
