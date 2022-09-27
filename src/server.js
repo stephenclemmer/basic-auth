@@ -2,19 +2,23 @@
 
 // 3rd Party Resources
 const express = require('express');
+const { Sequelize, DataTypes } = require('sequelize');
+const app = express();
+const PORT = process.env.PORT || 3002;
+
 const bcrypt = require('bcrypt');
 const base64 = require('base-64');
-const { Sequelize, DataTypes } = require('sequelize');
 
 // NOTE: connected to sqlite::memory out of box for proof of life
 // TODO:
 // connect postgres for local dev environment and prod
 // handle SSL requirements
 // connect with sqlite::memory for testing
-const DATABASE_URL = 'sqlite::memory'
+const DATABASE_URL = process.env.NODE_ENV === 'test'
+  ? 'sqlite::memory'
+  : process.env.DATABASE_URL;
 
 // Prepare the express app
-const app = express();
 
 // Process JSON input and put the data on req.body
 app.use(express.json());
@@ -91,9 +95,15 @@ app.post('/signin', async (req, res) => {
 });
 
 // make sure our tables are created, start up the HTTP server.
-sequelizeDatabase.sync()
-  .then(() => {
-    app.listen(3000, () => console.log('server up'));
-  }).catch(e => {
-    console.error('Could not start server', e.message);
-  });
+// sequelizeDatabase.sync()
+//   .then(() => {
+//     app.listen(3001, () => console.log('server up'));
+//   }).catch(e => {
+//     console.error('Could not start server', e.message);
+//   });
+
+function start() {
+  app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+}
+
+module.exports = { app, start };
